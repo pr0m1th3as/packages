@@ -49,6 +49,9 @@ jobs:
           GH_TOKEN_STARCOUNT: ${{ secrets.GH_TOKEN_STARCOUNT }}
         run: |
           bundle exec ruby ./assets/get_stars.rb
+      - name: Mirror the tarballs legacy pkg downloads
+        run: |
+          bundle exec ruby ./assets/legacy_pkg.rb
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"

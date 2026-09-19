@@ -11,11 +11,20 @@ layout: default
 
 {%- assign pkg_name = page.permalink | remove: "/" -%}
 
+{%- if site.data.legacy -%}
+  {%- assign legacy = site.data.legacy[pkg_name] -%}
+{%- else -%}
+  {%- assign legacy = page.versions.first -%}
+{%- endif %}
+
 <!--
-  This is used by Octave's pkg-command to get the latest package version
+  This is used by the pkg-command of Octave 10 and earlier to get the package
+  version to install, see assets/legacy_pkg.rb
+{%- if legacy %}
   <td class="package_table">Package Version:</td>
-  <td>{{ page.versions.first.id }}</td>
-  {{ pkg_name }}-{{ page.versions.first.id }}.tar.gz
+  <td>{{ legacy.version | default: legacy.id }}</td>
+  {{ pkg_name }}-{{ legacy.version | default: legacy.id }}.tar.gz
+{%- endif %}
 -->
 
 <a href="{{ '/' | relative_url }}" role="button" class="btn btn-primary mb-4">

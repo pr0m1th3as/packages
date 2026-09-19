@@ -1,0 +1,13 @@
+---
+layout: null
+permalink: /list_packages.php
+---
+{%- comment -%}
+  Read by 'pkg list -forge' in Octave 10 and earlier, which only splits it on
+  whitespace; the name is kept because those versions ask for it.
+{%- endcomment -%}
+{%- for pkg in site.pages -%}
+{%- if pkg.layout == "package" %}
+{{ pkg.name | remove: ".yaml" }}
+{%- endif -%}
+{%- endfor %}

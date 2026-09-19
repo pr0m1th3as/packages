@@ -1,2 +1,4 @@
 _site/
 .vscode/
+download/
+_data/legacy.json
